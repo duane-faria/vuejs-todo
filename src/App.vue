@@ -30,6 +30,15 @@ export default {
       return Math.round((done / total) * 100) || 0;
     }
   },
+  watch: {
+    tasks() {
+      localStorage.setItem("tasks", JSON.stringify(this.tasks));
+    }
+  },
+  created() {
+    const json = localStorage.getItem("tasks");
+    this.tasks = JSON.parse(json) || [];
+  },
   methods: {
     addTask(task) {
       const sameName = t => t.name === task.name;
